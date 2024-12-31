@@ -127,12 +127,17 @@ class RenameEditor : JFrame() {
                     val matcher: Matcher = pat.matcher(f.name)
                     if (matcher.find()) {
 //                        printStatus("发现文件：" + f.name)
-                        val result = f.renameTo(File(f.parentFile, matcher.group(1)))
-                        println(result)
-                        if (result) {
-                            printStatus("${f.name} -> ${matcher.group(1)}")
+                        println("matcher group count: ${matcher.groupCount()}")
+                        if (matcher.groupCount() >= 1) {
+                            val result = f.renameTo(File(f.parentFile, matcher.group(1)))
+                            println(result)
+                            if (result) {
+                                printStatus("${f.name} -> ${matcher.group(1)}")
+                            } else {
+                                printStatus("${f.name} -> ${matcher.group(1)} failed")
+                            }
                         } else {
-                            printStatus("${f.name} -> ${matcher.group(1)} failed")
+                            printStatus("输入的正则表达式不包含目标文件名分组")
                         }
                     }
                 }
