@@ -66,7 +66,7 @@ class RenameEditor : JFrame() {
         fileSuffixName = JTextField(DEFAULT_FILE_SUFFIX)
         constraints.gridx = 1
         constraints.gridy = 0
-        constraints.weightx = 1.0
+        constraints.ipadx = 80
         constraints.insets = Insets(10, 2, 0, 0)
         constraints.fill = GridBagConstraints.HORIZONTAL
         gridBagLayout.setConstraints(fileSuffixName, constraints)
@@ -80,6 +80,7 @@ class RenameEditor : JFrame() {
 
         val renameBtn = JButton("批量重命名")
         constraints.anchor = GridBagConstraints.NORTH
+        constraints.ipadx = 0
         constraints.insets = Insets(10, 10, 0, 0)
         constraints.gridx = 0
         constraints.gridy = 2
@@ -92,10 +93,11 @@ class RenameEditor : JFrame() {
 
         renameStatus = JTextArea()
         renameStatus.isEditable = false
+        renameStatus.lineWrap = true
         constraints.gridx = 2
         constraints.gridy = 0
 
-        constraints.weightx = 4.0
+        constraints.weightx = 1.0
         constraints.weighty = 1.0
         constraints.fill = GridBagConstraints.BOTH
         constraints.gridwidth = GridBagConstraints.REMAINDER
