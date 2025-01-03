@@ -1,3 +1,4 @@
+import java.awt.Dimension
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
 import java.awt.Insets
@@ -66,7 +67,10 @@ class RenameEditor : JFrame() {
         fileSuffixName = JTextField(DEFAULT_FILE_SUFFIX)
         constraints.gridx = 1
         constraints.gridy = 0
-        constraints.ipadx = 80
+        val size = fileSuffixName.preferredSize
+        val minWidth = 180
+        fileSuffixName.preferredSize = Dimension(minWidth, size.height)
+        fileSuffixName.minimumSize = Dimension(minWidth, size.height)
         constraints.insets = Insets(10, 2, 0, 0)
         constraints.fill = GridBagConstraints.HORIZONTAL
         gridBagLayout.setConstraints(fileSuffixName, constraints)
@@ -94,17 +98,19 @@ class RenameEditor : JFrame() {
         renameStatus = JTextArea()
         renameStatus.isEditable = false
         renameStatus.lineWrap = true
+        val scrollPane = JScrollPane(renameStatus)
+        scrollPane.verticalScrollBarPolicy = ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED
+        scrollPane.horizontalScrollBarPolicy = ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER
         constraints.gridx = 2
         constraints.gridy = 0
-
         constraints.weightx = 1.0
         constraints.weighty = 1.0
         constraints.fill = GridBagConstraints.BOTH
         constraints.gridwidth = GridBagConstraints.REMAINDER
         constraints.gridheight = GridBagConstraints.REMAINDER
         constraints.insets = Insets(10, 10, 10, 10)
-        gridBagLayout.setConstraints(renameStatus, constraints)
-        contentPane.add(renameStatus)
+        gridBagLayout.setConstraints(scrollPane, constraints)
+        contentPane.add(scrollPane)
     }
 
     private fun handleRenameFiles() {
